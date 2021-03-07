@@ -62,7 +62,7 @@ func (c cacheService) UpdateCache(s string) error {
 		return errors.Wrapf(err, "unable get storage")
 	}
 
-	defer storage.Cleanup()
+	//	defer storage.Cleanup()
 
 	alreadyUptoDate := false
 	// checks if there is an existing git repo in the bucket
@@ -177,7 +177,7 @@ func fetchGitRepo(storagePath *StoragePath, data []byte, repo RepoURL) (*git.Rep
 		return nil, false,
 			errors.Wrapf(err, "unable unarchive targz file %s in %s", storagePath.BlobArchiveFile, storagePath.BlobArchiveDir)
 	}
-	p := path.Join(storagePath.GitDir, repo.NonURLString())
+	p := path.Join(storagePath.GitDir, storagePath.GitDir)
 	gitRepo, err := git.PlainOpen(p)
 	if err != nil {
 		return nil, false, errors.Wrapf(err, "unable to open the git dir %s", p)

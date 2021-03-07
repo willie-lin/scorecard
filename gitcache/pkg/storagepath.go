@@ -36,14 +36,19 @@ type StoragePath struct {
 
 // NewStoragePath returns path for blob, archiving and also creates temp directories for archiving.
 func NewStoragePath(repo RepoURL, tempDir string) (StoragePath, error) {
+	const length int = 5
 	bucketPath := fmt.Sprintf("gitcache/%s/%s/%s", repo.Host, repo.Owner, repo.Repo)
-	gitDir := path.Join(tempDir, repo.NonURLString())
+	randpath, err := GenerateRandomString(length)
+	if err != nil {
+		return StoragePath{}, errors.Wrapf(err, "unable to generate random string %s", repo.NonURLString())
+	}
+	gitDir := path.Join(tempDir, randpath)
 
-	err := os.Mkdir(gitDir, 0755)
+	err = os.Mkdir(gitDir, 0755)
 	if err != nil {
 		return StoragePath{}, errors.Wrapf(err, "unable to temp directory %s", gitDir)
 	}
-	gitTarPath := path.Join(gitDir, "gitfolder.tar.gz")
+	gitTarPath := path.Join(gitDir, repo.NonURLString()+".tar.gz")
 
 	blobArchiveDir := gitDir + "tar"
 	err = os.Mkdir(blobArchiveDir, 0755)
