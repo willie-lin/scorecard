@@ -31,8 +31,7 @@ var _ = Describe("E2E TEST:CIIBestPractices", func() {
 			checkRequest := checker.CheckRequest{
 				Ctx:         context.Background(),
 				Client:      ghClient,
-				HTTPClient:  httpClient,
-				RepoClient:  nil,
+				HTTPClient:  client,
 				Owner:       "tensorflow",
 				Repo:        "tensorflow",
 				GraphClient: graphClient,

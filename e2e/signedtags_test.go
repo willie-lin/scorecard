@@ -31,8 +31,7 @@ var _ = Describe("E2E TEST:Signedtags", func() {
 			checkRequest := checker.CheckRequest{
 				Ctx:         context.Background(),
 				Client:      ghClient,
-				HTTPClient:  httpClient,
-				RepoClient:  nil,
+				HTTPClient:  client,
 				Owner:       "bitcoin",
 				Repo:        "bitcoin",
 				GraphClient: graphClient,
