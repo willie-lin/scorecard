@@ -55,18 +55,18 @@ $(GOLANGGCI_LINT): install
 check-linter: ## Install and run golang linter
 check-linter: $(GOLANGGCI_LINT)
 	# Run golangci-lint linter
-	golangci-lint run -c .golangci.yml
+	#golangci-lint run -c .golangci.yml
 
 add-projects: ## Adds new projects to ./cron/data/projects.csv
 add-projects: ./cron/data/projects.csv | build-add-script
 	# Add new projects to ./cron/data/projects.csv
-	./cron/data/add/add ./cron/data/projects.new.csv
+	./cron/data/add/add ./cron/data/projects.csv ./cron/data/projects.new.csv
 	mv ./cron/data/projects.new.csv ./cron/data/projects.csv
 
 validate-projects: ## Validates ./cron/data/projects.csv
 validate-projects: ./cron/data/projects.csv | build-validate-script
 	# Validate ./cron/data/projects.csv
-	./cron/data/validate/validate
+	./cron/data/validate/validate ./cron/data/projects.csv
 
 tree-status: ## Verify tree is clean and all changes are committed
 	# Verify the tree is clean and all changes are commited
@@ -150,6 +150,10 @@ e2e: build-scorecard check-env | $(GINKGO)
 
 $(GINKGO): install
 
+cron-e2e: build-pubsub
+	GOOGLE_APPLICATION_CREDENTIALS=~/.gcloud.json \
+	SCORECARD_DATA_BUCKET_URL=gs://ossf-scorecard-latest \
+	./cron/controller/controller ./cron/data/test_projects.csv
 
 ci-e2e: ## Runs CI e2e tests. Requires GITHUB_AUTH_TOKEN env var to be set to GitHub personal access token
 ci-e2e: build-scorecard check-env | $(GINKGO)

@@ -17,6 +17,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
 	"strconv"
 	"time"
 
@@ -82,10 +83,19 @@ func PublishToRepoRequestTopic(ctx context.Context, iter data.Iterator, datetime
 func main() {
 	ctx := context.Background()
 	t := time.Now()
-	reader, err := data.MakeIterator()
+
+	if len(os.Args) != 2 {
+		panic("must provide a single argument")
+	}
+	inFile, err := os.OpenFile(os.Args[1], os.O_RDONLY, 0o644)
 	if err != nil {
 		panic(err)
 	}
+	reader, err := data.MakeIteratorFrom(inFile)
+	if err != nil {
+		panic(err)
+	}
+
 	shardNum, err := PublishToRepoRequestTopic(ctx, reader, t)
 	if err != nil {
 		panic(err)

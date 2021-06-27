@@ -29,9 +29,16 @@ import (
 // * Sort and output all projects
 // Usage: add all new dependencies to the projects.csv file before running this script
 // Args:
-//     path to output.csv file
+//     path to input.csv output.csv
 func main() {
-	iter, err := data.MakeIterator()
+	if len(os.Args) != 3 {
+		panic("must provide 2 arguments")
+	}
+	inFile, err := os.OpenFile(os.Args[1], os.O_RDONLY, 0o644)
+	if err != nil {
+		panic(err)
+	}
+	iter, err := data.MakeIteratorFrom(inFile)
 	if err != nil {
 		panic(err)
 	}
@@ -45,7 +52,7 @@ func main() {
 	if err := data.SortAndAppendTo(&buf, repoURLs, nil); err != nil {
 		panic(err)
 	}
-	projects, err := os.OpenFile(os.Args[1], os.O_WRONLY|os.O_CREATE, 0o644)
+	projects, err := os.OpenFile(os.Args[2], os.O_WRONLY|os.O_CREATE, 0o644)
 	if err != nil {
 		panic(err)
 	}

@@ -24,19 +24,27 @@ import (
 // Updates projects repositories with a projects dependencies.
 // Adds "project=${PROJECT},dependency=true" to the repositories metadata.
 // Args:
-//     file path to projects.csv
+//     file path to old_projects.csv new_projects.csv
 func main() {
-	newRepos, err := getDependencies()
+	if len(os.Args) != 3 {
+		panic("must provide 2 arguments")
+	}
+	inFile, err := os.OpenFile(os.Args[1], os.O_RDONLY, 0o644)
+	if err != nil {
+		panic(err)
+	}
+	defer inFile.Close()
+	oldRepos, newRepos, err := getDependencies(inFile)
 	if err != nil {
 		panic(err)
 	}
 
 	var buf bytes.Buffer
-	if err := data.SortAndAppend(&buf, newRepos); err != nil {
+	if err := data.SortAndAppendTo(&buf, oldRepos, newRepos); err != nil {
 		panic(err)
 	}
 
-	projects, err := os.OpenFile(os.Args[1], os.O_WRONLY, 0o644)
+	projects, err := os.OpenFile(os.Args[2], os.O_CREATE|os.O_WRONLY, 0o644)
 	if err != nil {
 		panic(err)
 	}
