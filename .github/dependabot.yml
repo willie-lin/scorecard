@@ -6,6 +6,10 @@ updates:
     interval: daily
   commit-message:
       prefix: ":seedling:"
+  reviewers:
+          - "azeemshaikh38"
+          - "naveensrinivasan"
+          - "laurentsimon"
   open-pull-requests-limit: 10
 - package-ecosystem: "github-actions"
   directory: "/"
@@ -13,12 +17,20 @@ updates:
       interval: "daily"
   commit-message:
       prefix: ":seedling:"
+  reviewers:
+          - "azeemshaikh38"
+          - "naveensrinivasan"
+          - "laurentsimon"
 - package-ecosystem: docker
   directory: "/"
   schedule:
     interval: daily
   commit-message:
       prefix: ":seedling:"
+  reviewers:
+          - "azeemshaikh38"
+          - "naveensrinivasan"
+          - "laurentsimon"
   open-pull-requests-limit: 10
 - package-ecosystem: gomod
   directory: "/gitcache"
@@ -26,6 +38,10 @@ updates:
     interval: daily
   commit-message:
       prefix: ":seedling:"
+  reviewers:
+          - "azeemshaikh38"
+          - "naveensrinivasan"
+          - "laurentsimon"
   open-pull-requests-limit: 10
 - package-ecosystem: docker
   directory: "/gitcache"
@@ -33,10 +49,18 @@ updates:
     interval: daily
   commit-message:
       prefix: ":seedling:"
+  reviewers:
+          - "azeemshaikh38"
+          - "naveensrinivasan"
+          - "laurentsimon"
 - package-ecosystem: gomod
   directory: "/scripts"
   schedule:
     interval: daily
   commit-message:
       prefix: ":seedling:"
+  reviewers:
+          - "azeemshaikh38"
+          - "naveensrinivasan"
+          - "laurentsimon"
   open-pull-requests-limit: 10
