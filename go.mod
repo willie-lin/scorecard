@@ -29,9 +29,8 @@ require (
 	go.uber.org/multierr v1.7.0 // indirect
 	go.uber.org/zap v1.18.1
 	gocloud.dev v0.23.0
-	golang.org/x/crypto v0.0.0-20210513164829-c07d793c2f9a // indirect
-	golang.org/x/net v0.0.0-20210510120150-4163338589ed // indirect
-	golang.org/x/tools v0.1.4
+	golang.org/x/crypto v0.17.0 // indirect
+	golang.org/x/tools v0.6.0
 	google.golang.org/genproto v0.0.0-20210624174822-c5cf32407d0a
 	google.golang.org/protobuf v1.27.1
 	gopkg.in/yaml.v2 v2.4.0
