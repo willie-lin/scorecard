@@ -3,16 +3,15 @@ module github.com/ossf/scorecard/gitcache
 go 1.15
 
 require (
-	github.com/go-git/go-git/v5 v5.4.2
+	github.com/go-git/go-git/v5 v5.11.0
 	github.com/go-vela/archiver v2.1.0+incompatible // indirect
 	github.com/mholt/archiver v3.1.1+incompatible
 	github.com/onsi/ginkgo v1.16.4
-	github.com/onsi/gomega v1.13.0
+	github.com/onsi/gomega v1.27.10
 	github.com/pierrec/lz4 v2.6.0+incompatible // indirect
 	github.com/pkg/errors v0.9.1
 	go.uber.org/zap v1.18.1
 	gocloud.dev v0.22.0
-	golang.org/x/tools v0.1.0 // indirect
 )
 
 // The originial repository does not handle symlinks and there is an open PR https://github.com/mholt/archiver/pull/230.
